@@ -18,7 +18,7 @@ const server = http.createServer(function (req, res) {
             // Scrivo la battuta nel file JSON
             writeResult(phrasePath, phrase);
 
-            // Rispondo con un messaggio
+            //stampo a schermo la frase
             res.end(phrase);
         })
         .catch((error) => {

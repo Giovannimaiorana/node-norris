@@ -24,9 +24,27 @@ function readApi() {
 }
 
 //scrivo in file json
-function writeResult(phrasePath, phrase) {
-    fs.writeFileSync(phrasePath, JSON.stringify(phrase, null, 2), 'utf-8');
+function writeResult(phrasePath, newPhrase) {
+    let phrases = [];
+
+    if (fs.existsSync(phrasePath)) {
+        const existingData = fs.readFileSync(phrasePath, 'utf-8');
+        phrases = JSON.parse(existingData);
+    }
+
+
+    phrases.push(newPhrase);
+
+    fs.writeFileSync(phrasePath, JSON.stringify(phrases, null, 2), 'utf-8');
 }
+
+
+
+//FUNZIONE PER BATTUTA UNICA 
+
+
+
+
 
 //ESPORTAZIONE
 module.exports = { createPath, readApi, writeResult };
