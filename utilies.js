@@ -31,11 +31,17 @@ function writeResult(phrasePath, newPhrase) {
         const existingData = fs.readFileSync(phrasePath, 'utf-8');
         phrases = JSON.parse(existingData);
     }
+    if (phrases.some(phrase => phrase === newPhrase)) {
+        console.log('La battuta è già presente nel file locale. Scarico un altra battuta');
+        // cerco altra battuta 
+        const newJoke = readApi();
+        writeResult(phrasePath, newJoke);
+    } else {
+        phrases.push(newPhrase);
 
-
-    phrases.push(newPhrase);
-
-    fs.writeFileSync(phrasePath, JSON.stringify(phrases, null, 2), 'utf-8');
+        fs.writeFileSync(phrasePath, JSON.stringify(phrases, null, 2), 'utf-8');
+        console.log('Battuta salvata con successo nel file locale.');
+    }
 }
 
 
